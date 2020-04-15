@@ -1249,6 +1249,9 @@ void agk::SetVSync( int mode )
 	if ( !g_pWindow ) return;
 	if ( mode < 0 ) mode = 0;
 
+	if ( mode > 0 ) m_iSyncMode = 2;
+	else m_iSyncMode = 0;
+
 	glfwSwapInterval( mode );
 }
 
@@ -5170,7 +5173,7 @@ bool  agk::PlatformHasTwitter             ( void )
 
 // local notifications
 
-void agk::PlatformCreateLocalNotification( int iID, int datetime, const char *szMessage )
+void agk::PlatformCreateLocalNotification( int iID, int datetime, const char *szMessage, const char *szDeepLink )
 {
 	
 }
@@ -5633,3 +5636,22 @@ void agk::ARDeleteAnchor( int anchorID )
 	
 }
 
+int agk::GetAppInstalled( const char *packageName )
+//****
+{
+	return 0;
+}
+
+// SnapChat
+
+void agk::SetSnapChatStickerSettings( float x, float y, int width, int height, float angle )
+//****
+{
+
+}
+
+void agk::ShareSnapChatImage( const char* imageFile, const char* stickerFile, const char* caption, const char* url )
+//****
+{
+
+}

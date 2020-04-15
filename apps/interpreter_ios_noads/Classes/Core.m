@@ -56,7 +56,18 @@ using namespace AGK;
 	}
 	[viewController setActive];
     
-    NSDictionary *remoteNotify = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    NSDictionary *localNotify = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
+    if ( localNotify )
+    {
+        NSDictionary *aps = [localNotify objectForKey:@"aps"];
+        if ( aps )
+        {
+            NSString *deeplink = [aps objectForKey:@"deeplink"];
+            if ( deeplink ) agk::HandleDeepLink( [deeplink UTF8String] );
+        }
+    }
+
+	NSDictionary *remoteNotify = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if ( remoteNotify )
     {
         NSDictionary *aps = [remoteNotify objectForKey:@"aps"];
@@ -232,6 +243,7 @@ using namespace AGK;
 @implementation GADInterstitial : NSObject @end
 @implementation GADAdSize : NSObject @end
 @implementation GADExtras : NSObject @end
+@implementation GADMobileAds : NSObject @end
 GADAdSize const *kGADAdSizeBanner;
 GADAdSize const *kGADAdSizeLargeBanner;
 GADAdSize const *kGADAdSizeMediumRectangle;
@@ -258,3 +270,9 @@ NSString * CBLocationGameScreen;
  @implementation FIRApp : NSObject @end
  @implementation FIRAnalytics : NSObject @end
  */
+
+/*
+// use this if you want to remove the SnapChat commands
+@implementation SCSDKPhotoSnapContent : NSObject @end
+@implementation SCSDKSnapPhoto : NSObject @end
+*/
